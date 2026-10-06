@@ -84,24 +84,24 @@ function Icon({ name }) {
 
 function Shell({ children }) {
   const { pathname } = useLocation();
-  const time = new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
   return (
     <div className="stage">
-      <div className="poster-glow" />
-      <div className="phone">
-        <div className="status-bar">
-          <span>{time}</span>
-          <span className="notch" />
-          <span>5G ▮▮▮▮</span>
-        </div>
-        {children}
-        <nav className="tabbar">
+      <div className="poster-glow" aria-hidden="true" />
+      <div className="app-shell">
+        <nav className="tabbar" aria-label="Main">
+          <div className="nav-brand">
+            <div className="logo-line">
+              <strong>SMH</strong> <em>CONNECT</em>
+            </div>
+            <small>Sindiso Magaqa Heights</small>
+          </div>
           <Tab to="/" icon="home" label="Home" active={pathname === "/"} />
           <Tab to="/notices" icon="bell" label="Notices" active={pathname.startsWith("/notices")} />
           <Tab to="/events" icon="calendar" label="Events" active={pathname.startsWith("/events")} />
           <Tab to="/requests" icon="list" label="Requests" active={pathname.startsWith("/requests")} />
           <Tab to="/feedback" icon="heart" label="Voice" active={pathname.startsWith("/feedback")} />
         </nav>
+        <main className="app-main">{children}</main>
       </div>
     </div>
   );
