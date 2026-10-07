@@ -133,7 +133,7 @@ function Home() {
   return (
     <div className="screen home">
       <section className="hero">
-        <img src="/hero.jpg" alt="SMH residents together" />
+        <img src="/hero.jpg?v=2" alt="Sindiso Magaqa Heights residence" />
         <div className="hero-copy">
           <p className="hero-kicker">SMH CONNECT</p>
           <h1>Welcome, SMH Family</h1>

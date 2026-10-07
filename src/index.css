@@ -171,6 +171,7 @@ select {
   width: 100%;
   height: clamp(240px, 42vw, 380px);
   object-fit: cover;
+  object-position: 55% 60%;
   display: block;
   filter: saturate(1.15);
 }
