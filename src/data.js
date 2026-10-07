@@ -47,10 +47,38 @@ export const announcements = [
 ];
 
 export const events = [
-  { id: "e1", date: "15 Mar", title: "SMH Walk & Talk", place: "Main Gate", time: "07:30" },
-  { id: "e2", date: "20 Mar", title: "Sports Planning", place: "Rec Hall", time: "18:00" },
-  { id: "e3", date: "27 Mar", title: "Women’s Month Event", place: "Courtyard", time: "16:00" },
-  { id: "e4", date: "5 Apr", title: "Floor Braai", place: "Back Lawn", time: "17:00" },
+  {
+    id: "e1",
+    date: "15 Mar",
+    title: "SMH Walk & Talk",
+    place: "Main Gate",
+    time: "07:30",
+    image: "https://images.unsplash.com/photo-1476480862126-209bfaa8edc8?w=900&q=80",
+  },
+  {
+    id: "e2",
+    date: "20 Mar",
+    title: "Sports Planning",
+    place: "Rec Hall",
+    time: "18:00",
+    image: "https://images.unsplash.com/photo-1517649763962-0c623066013b?w=900&q=80",
+  },
+  {
+    id: "e3",
+    date: "27 Mar",
+    title: "Women’s Month",
+    place: "Courtyard",
+    time: "16:00",
+    image: "https://images.unsplash.com/photo-1511632765486-a01980e01a18?w=900&q=80",
+  },
+  {
+    id: "e4",
+    date: "5 Apr",
+    title: "Floor Braai",
+    place: "Back Lawn",
+    time: "17:00",
+    image: "https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=900&q=80",
+  },
 ];
 
 export const interviews = [

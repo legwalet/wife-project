@@ -65,15 +65,12 @@ function Icon({ name }) {
         <path d="M16 20c.4-2.4 1.8-3.6 4-3.8" />
       </>
     ),
-    target: (
+    user: (
       <>
-        <circle cx="12" cy="12" r="8" />
-        <circle cx="12" cy="12" r="4" />
-        <circle cx="12" cy="12" r="1" fill="currentColor" />
+        <circle cx="12" cy="8" r="4" />
+        <path d="M4 20c1.2-4 3.8-6 8-6s6.8 2 8 6" />
       </>
     ),
-    chart: <path d="M4 20h16M7 16V9M12 16V5M17 16v-6" />,
-    plus: <path d="M12 5v14M5 12h14" />,
   };
   return (
     <svg className="icon" {...common} aria-hidden="true">
@@ -96,10 +93,9 @@ function Shell({ children }) {
             <small>Sindiso Magaqa Heights</small>
           </div>
           <Tab to="/" icon="home" label="Home" active={pathname === "/"} />
-          <Tab to="/notices" icon="bell" label="Notices" active={pathname.startsWith("/notices")} />
-          <Tab to="/events" icon="calendar" label="Events" active={pathname.startsWith("/events")} />
-          <Tab to="/requests" icon="list" label="Requests" active={pathname.startsWith("/requests")} />
-          <Tab to="/feedback" icon="heart" label="Voice" active={pathname.startsWith("/feedback")} />
+          <Tab to="/notices" icon="bell" label="Notices" active={pathname.startsWith("/notices") || pathname.startsWith("/announcements")} />
+          <Tab to="/requests" icon="wrench" label="Requests" active={pathname.startsWith("/requests") || pathname.startsWith("/maintenance")} />
+          <Tab to="/profile" icon="user" label="Profile" active={pathname.startsWith("/profile")} />
         </nav>
         <main className="app-main">{children}</main>
       </div>
@@ -116,13 +112,15 @@ function Tab({ to, icon, label, active }) {
   );
 }
 
-function ScreenHeader({ title, subtitle }) {
+function ScreenHeader({ title, subtitle, back = true }) {
   const navigate = useNavigate();
   return (
     <header className="screen-head">
-      <button className="back" onClick={() => navigate(-1)} aria-label="Back">
-        <Icon name="back" />
-      </button>
+      {back ? (
+        <button className="back" onClick={() => navigate(-1)} aria-label="Back">
+          <Icon name="back" />
+        </button>
+      ) : null}
       <div>
         <h1>{title}</h1>
         {subtitle ? <p>{subtitle}</p> : null}
@@ -131,78 +129,68 @@ function ScreenHeader({ title, subtitle }) {
   );
 }
 
-function BrandHeader() {
-  return (
-    <header className="brand">
-      <div className="brand-row">
-        <span className="houses">⌂⌂</span>
-        <div>
-          <div className="logo-line">
-            <strong>SMH</strong> <em>CONNECT</em>
-          </div>
-          <small>SINDISO MAGAQA HEIGHTS</small>
-        </div>
-        <span className="houses">⌂</span>
-      </div>
-      <p className="tagline">Our Home. Our People. Our Platform.</p>
-    </header>
-  );
-}
-
 function Home() {
   return (
     <div className="screen home">
-      <BrandHeader />
-      <section className="welcome-row">
-        <article className="welcome">
-          <div className="welcome-icon">⌂</div>
-          <div>
-            <h2>Welcome, SMH Family!</h2>
-            <p>A stronger residence. A brighter tomorrow.</p>
-          </div>
-        </article>
-        <div className="pillars">
-          <span>
-            <Icon name="people" /> People
-          </span>
-          <span>
-            <Icon name="target" /> Purpose
-          </span>
-          <span>
-            <Icon name="chart" /> Progress
-          </span>
+      <section className="hero">
+        <img src="/hero.jpg" alt="SMH residents together" />
+        <div className="hero-copy">
+          <p className="hero-kicker">SMH CONNECT</p>
+          <h1>Welcome, SMH Family</h1>
+          <p className="hero-sub">People · Purpose · Progress</p>
         </div>
       </section>
-      <div className="tiles">
-        <Tile to="/notices" icon="bell" color="red" title="Notice Board" body="View all important notices, updates and reminders." cta="View Notices" />
-        <Tile to="/announcements" icon="megaphone" color="green" title="Announcements" body="Latest news from SMH House Committee and NMU." cta="View Announcements" />
-        <Tile to="/events" icon="calendar" color="blue" title="Upcoming Events" body="15 Mar Walk & Talk · 20 Mar Sports · 27 Mar Women’s Month." cta="View Calendar" />
-        <Tile to="/reviews" icon="star" color="gold" title="Monthly Student Reviews" body="Share your experience through monthly hallway interviews." cta="Give Feedback" />
-        <Tile to="/interviews" icon="mic" color="teal" title="Student Interview Capture" body="Real student voices. Real stories. Real change." cta="Watch & Contribute" />
-        <Tile to="/gallery" icon="camera" color="green" title="Event Gallery" body="Photos and highlights from residence life." cta="Open Gallery" />
-        <Tile to="/maintenance" icon="wrench" color="red" title="Maintenance Concerns" body="Log and track maintenance requests around SMH." cta="Submit a Request" />
-        <Tile to="/requests" icon="list" color="blue" title="Pending Requests" body="Track your submitted requests." cta="View My Requests" />
-        <Tile to="/laundry" icon="shirt" color="navy" title="Laundry & Access Updates" body="Stay informed on laundry schedules and residence access." cta="View Updates" />
-        <Tile to="/academic" icon="book" color="green" title="Academic Resources" body="Study tips, resources and academic support." cta="View Resources" />
-        <Tile to="/platforms" icon="share" color="mix" title="Platforms" body="Stay connected with SMH across all platforms." cta="Stay Connected" />
-        <Tile to="/feedback" icon="heart" color="gold" title="Community Feedback" body="Share ideas, report challenges, help us improve." cta="Be Part of the Change" />
-      </div>
-      <p className="voice-banner">“Your Voice Builds A Better SMH”</p>
+
+      <section className="section">
+        <div className="section-head">
+          <h2>This week</h2>
+          <Link to="/events">See all</Link>
+        </div>
+        <div className="carousel" role="list">
+          {events.map((event) => (
+            <article key={event.id} className="slide" role="listitem">
+              <img src={event.image} alt="" />
+              <div className="slide-copy">
+                <span className="slide-date">{event.date}</span>
+                <h3>{event.title}</h3>
+                <p>
+                  {event.time} · {event.place}
+                </p>
+              </div>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section className="section">
+        <div className="section-head">
+          <h2>Jump in</h2>
+        </div>
+        <div className="shortcuts">
+          <Shortcut to="/notices" icon="bell" tone="rust" label="Notices" />
+          <Shortcut to="/requests" icon="wrench" tone="gold" label="Log issue" />
+          <Shortcut to="/gallery" icon="camera" tone="green" label="Gallery" />
+          <Shortcut to="/academic" icon="book" tone="leaf" label="Study" />
+          <Shortcut to="/interviews" icon="mic" tone="rust" label="Voices" />
+          <Shortcut to="/platforms" icon="share" tone="gold" label="Chat" />
+        </div>
+      </section>
+
+      <section className="pulse">
+        <p>Your voice builds a better SMH</p>
+        <Link to="/feedback">Share an idea</Link>
+      </section>
     </div>
   );
 }
 
-function Tile({ to, icon, color, title, body, cta }) {
+function Shortcut({ to, icon, tone, label }) {
   return (
-    <Link className={`tile ${color}`} to={to}>
-      <div className="tile-top">
-        <span className="tile-icon">
-          <Icon name={icon} />
-        </span>
-        <h3>{title}</h3>
-      </div>
-      <p>{body}</p>
-      <span className="cta">{cta} →</span>
+    <Link className={`shortcut ${tone}`} to={to}>
+      <span className="shortcut-icon">
+        <Icon name={icon} />
+      </span>
+      {label}
     </Link>
   );
 }
@@ -210,14 +198,20 @@ function Tile({ to, icon, color, title, body, cta }) {
 function Notices() {
   return (
     <div className="screen">
-      <ScreenHeader title="Notice Board" subtitle="Updates and reminders" />
+      <ScreenHeader title="Notices" subtitle="House + campus" back={false} />
+      <div className="chips">
+        <Link className="chip" to="/announcements">
+          Announcements
+        </Link>
+      </div>
       <ul className="cards">
         {notices.map((n) => (
           <li key={n.id} className="card">
-            <span className={`chip ${n.tag === "Urgent" ? "warn" : ""}`}>{n.tag}</span>
+            <div className="card-meta">
+              <span className={`chip ${n.tag === "Urgent" ? "warn" : ""}`}>{n.tag}</span>
+              <small>{n.date}</small>
+            </div>
             <h3>{n.title}</h3>
-            <p>{n.body}</p>
-            <small>{n.date}</small>
           </li>
         ))}
       </ul>
@@ -228,14 +222,15 @@ function Notices() {
 function Announcements() {
   return (
     <div className="screen">
-      <ScreenHeader title="Announcements" subtitle="House Committee & NMU" />
+      <ScreenHeader title="Announcements" />
       <ul className="cards">
         {announcements.map((a) => (
           <li key={a.id} className="card">
-            <small className="from">{a.from}</small>
+            <div className="card-meta">
+              <small className="from">{a.from}</small>
+              <small>{a.date}</small>
+            </div>
             <h3>{a.title}</h3>
-            <p>{a.body}</p>
-            <small>{a.date}</small>
           </li>
         ))}
       </ul>
@@ -246,23 +241,21 @@ function Announcements() {
 function Events() {
   return (
     <div className="screen">
-      <ScreenHeader title="Upcoming Events" subtitle="Residence calendar" />
-      <ul className="cards">
-        {events.map((e) => (
-          <li key={e.id} className="card event">
-            <div className="date-badge">
-              <strong>{e.date.split(" ")[0]}</strong>
-              <span>{e.date.split(" ")[1]}</span>
-            </div>
-            <div>
-              <h3>{e.title}</h3>
+      <ScreenHeader title="Events" />
+      <div className="carousel stacked" role="list">
+        {events.map((event) => (
+          <article key={event.id} className="slide" role="listitem">
+            <img src={event.image} alt="" />
+            <div className="slide-copy">
+              <span className="slide-date">{event.date}</span>
+              <h3>{event.title}</h3>
               <p>
-                {e.place} · {e.time}
+                {event.time} · {event.place}
               </p>
             </div>
-          </li>
+          </article>
         ))}
-      </ul>
+      </div>
     </div>
   );
 }
@@ -278,7 +271,7 @@ function Reviews() {
     setStore(
       addItem("reviews", {
         id: crypto.randomUUID(),
-        name: name.trim() || "Anonymous SMH student",
+        name: name.trim() || "Anonymous",
         text: text.trim(),
         at: new Date().toISOString(),
       })
@@ -289,11 +282,11 @@ function Reviews() {
 
   return (
     <div className="screen">
-      <ScreenHeader title="Monthly Student Reviews" subtitle="Hallway interviews & feedback" />
+      <ScreenHeader title="Reviews" />
       <form className="form" onSubmit={submit}>
-        <input value={name} onChange={(e) => setName(e.target.value)} placeholder="Your name (optional)" />
-        <textarea value={text} onChange={(e) => setText(e.target.value)} placeholder="How is residence life this month?" rows={4} />
-        <button type="submit">Give Feedback</button>
+        <input value={name} onChange={(e) => setName(e.target.value)} placeholder="Name (optional)" />
+        <textarea value={text} onChange={(e) => setText(e.target.value)} placeholder="How is res this month?" rows={3} />
+        <button type="submit">Send</button>
       </form>
       <ul className="cards">
         {store.reviews.map((r) => (
@@ -330,10 +323,10 @@ function Interviews() {
 
   return (
     <div className="screen">
-      <ScreenHeader title="Student Voices" subtitle="Watch & contribute" />
+      <ScreenHeader title="Voices" />
       <form className="form" onSubmit={submit}>
         <input value={name} onChange={(e) => setName(e.target.value)} placeholder="Name" />
-        <textarea value={quote} onChange={(e) => setQuote(e.target.value)} placeholder="Share a real story from SMH..." rows={3} />
+        <textarea value={quote} onChange={(e) => setQuote(e.target.value)} placeholder="Share a story..." rows={3} />
         <button type="submit">Contribute</button>
       </form>
       <ul className="cards">
@@ -354,7 +347,7 @@ function Gallery() {
   const [open, setOpen] = useState(null);
   return (
     <div className="screen">
-      <ScreenHeader title="Event Gallery" subtitle="Residence life highlights" />
+      <ScreenHeader title="Gallery" />
       <div className="gallery">
         {gallery.map((g) => (
           <button key={g.id} className="shot" onClick={() => setOpen(g)}>
@@ -373,7 +366,7 @@ function Gallery() {
   );
 }
 
-function Maintenance() {
+function Requests() {
   const [store, setStore] = useState(loadStore);
   const [title, setTitle] = useState("");
   const [type, setType] = useState("Maintenance");
@@ -395,12 +388,7 @@ function Maintenance() {
 
   return (
     <div className="screen">
-      <ScreenHeader title="Maintenance Concerns" subtitle="Log and track requests" />
-      <div className="status-row">
-        <span>Reported</span>
-        <span>In Progress</span>
-        <span>Resolved</span>
-      </div>
+      <ScreenHeader title="Requests" subtitle="Wi-Fi · Laundry · Access" back={false} />
       <form className="form" onSubmit={submit}>
         <select value={type} onChange={(e) => setType(e.target.value)}>
           <option>Maintenance</option>
@@ -408,30 +396,9 @@ function Maintenance() {
           <option>Laundry</option>
           <option>Access</option>
         </select>
-        <input value={title} onChange={(e) => setTitle(e.target.value)} placeholder="Describe the issue" />
-        <button type="submit">Submit a Request</button>
+        <input value={title} onChange={(e) => setTitle(e.target.value)} placeholder="What’s broken?" />
+        <button type="submit">Submit</button>
       </form>
-      <ul className="cards">
-        {all.map((r) => (
-          <li key={r.id} className="card row">
-            <div>
-              <small>{r.type}</small>
-              <h3>{r.title}</h3>
-            </div>
-            <span className={`chip ${r.status.replace(/\s/g, "").toLowerCase()}`}>{r.status}</span>
-          </li>
-        ))}
-      </ul>
-    </div>
-  );
-}
-
-function Requests() {
-  const store = loadStore();
-  const all = [...store.requests, ...seedRequests];
-  return (
-    <div className="screen">
-      <ScreenHeader title="Pending Requests" subtitle="Wi-Fi · Laundry · Access" />
       <ul className="cards">
         {all.map((r) => (
           <li key={r.id} className="card row">
@@ -450,12 +417,7 @@ function Requests() {
 function Laundry() {
   return (
     <div className="screen">
-      <ScreenHeader title="Laundry & Access" subtitle="Schedules and notices" />
-      <div className="chips">
-        <span className="chip">Wi-Fi</span>
-        <span className="chip">Laundry</span>
-        <span className="chip">Access</span>
-      </div>
+      <ScreenHeader title="Laundry" />
       <ul className="cards">
         {laundrySchedule.map((d) => (
           <li key={d.day} className="card row">
@@ -464,10 +426,6 @@ function Laundry() {
           </li>
         ))}
       </ul>
-      <article className="card">
-        <h3>Access hours</h3>
-        <p>Main gate 24/7 with student card. Visitors until 20:00. After-hours sign-in at reception.</p>
-      </article>
     </div>
   );
 }
@@ -475,12 +433,11 @@ function Laundry() {
 function Academic() {
   return (
     <div className="screen">
-      <ScreenHeader title="Academic Resources" subtitle="Study support at SMH" />
+      <ScreenHeader title="Study" />
       <ul className="cards">
         {academic.map((a) => (
           <li key={a.id} className="card">
             <h3>{a.title}</h3>
-            <p>{a.detail}</p>
           </li>
         ))}
       </ul>
@@ -491,7 +448,7 @@ function Academic() {
 function Platforms() {
   return (
     <div className="screen">
-      <ScreenHeader title="Platforms" subtitle="Stay connected with SMH" />
+      <ScreenHeader title="Stay connected" />
       <ul className="cards">
         {platforms.map((p) => (
           <li key={p.id} className="card row">
@@ -520,10 +477,10 @@ function Feedback() {
 
   return (
     <div className="screen">
-      <ScreenHeader title="Community Feedback" subtitle="Your voice builds a better SMH" />
+      <ScreenHeader title="Your voice" />
       <form className="form" onSubmit={submit}>
-        <textarea value={idea} onChange={(e) => setIdea(e.target.value)} placeholder="Share an idea, suggestion, or challenge..." rows={4} />
-        <button type="submit">Send to House Committee</button>
+        <textarea value={idea} onChange={(e) => setIdea(e.target.value)} placeholder="Idea or challenge..." rows={3} />
+        <button type="submit">Send</button>
       </form>
       <ul className="cards">
         {store.feedback.map((f) => (
@@ -532,6 +489,27 @@ function Feedback() {
           </li>
         ))}
       </ul>
+    </div>
+  );
+}
+
+function Profile() {
+  return (
+    <div className="screen">
+      <ScreenHeader title="Profile" back={false} />
+      <article className="profile-card">
+        <div className="avatar">TL</div>
+        <div>
+          <h2>SMH Student</h2>
+          <p>Sindiso Magaqa Heights</p>
+        </div>
+      </article>
+      <div className="shortcuts four">
+        <Shortcut to="/reviews" icon="star" tone="gold" label="Reviews" />
+        <Shortcut to="/laundry" icon="shirt" tone="green" label="Laundry" />
+        <Shortcut to="/feedback" icon="heart" tone="rust" label="Ideas" />
+        <Shortcut to="/platforms" icon="share" tone="leaf" label="Socials" />
+      </div>
     </div>
   );
 }
@@ -547,12 +525,13 @@ export default function App() {
         <Route path="/reviews" element={<Reviews />} />
         <Route path="/interviews" element={<Interviews />} />
         <Route path="/gallery" element={<Gallery />} />
-        <Route path="/maintenance" element={<Maintenance />} />
+        <Route path="/maintenance" element={<Navigate to="/requests" replace />} />
         <Route path="/requests" element={<Requests />} />
         <Route path="/laundry" element={<Laundry />} />
         <Route path="/academic" element={<Academic />} />
         <Route path="/platforms" element={<Platforms />} />
         <Route path="/feedback" element={<Feedback />} />
+        <Route path="/profile" element={<Profile />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </Shell>
