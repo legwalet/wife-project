@@ -279,6 +279,10 @@ select {
   display: block;
 }
 
+.slide img.poster {
+  object-position: center 12%;
+}
+
 .slide-copy {
   position: absolute;
   inset: auto 0 0;
@@ -583,8 +587,9 @@ select {
 
 .shot img {
   width: 100%;
-  height: clamp(140px, 28vw, 220px);
+  height: clamp(160px, 32vw, 260px);
   object-fit: cover;
+  object-position: center 30%;
   display: block;
 }
 

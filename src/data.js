@@ -48,6 +48,24 @@ export const announcements = [
 
 export const events = [
   {
+    id: "e5",
+    date: "16 Apr",
+    title: "Career Showcase Day",
+    place: "Lecture Theatre",
+    time: "17:00",
+    image: "/events/career-showcase.jpg",
+    poster: true,
+  },
+  {
+    id: "e6",
+    date: "20 Feb",
+    title: "Movie Night",
+    place: "SMH Parking Lot / Rec Centre",
+    time: "19:30",
+    image: "/events/movie-night.jpg",
+    poster: true,
+  },
+  {
     id: "e1",
     date: "15 Mar",
     title: "SMH Walk & Talk",
@@ -103,26 +121,17 @@ export const interviews = [
 ];
 
 export const gallery = [
-  {
-    id: "g1",
-    title: "SMH Family Always",
-    src: "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=800&q=80",
-  },
-  {
-    id: "g2",
-    title: "Residence at dusk",
-    src: "https://images.unsplash.com/photo-1541339908198-c2e7bb2a8ba3?w=800&q=80",
-  },
-  {
-    id: "g3",
-    title: "Campus walk",
-    src: "https://images.unsplash.com/photo-1523580494863-6f3031224c94?w=800&q=80",
-  },
-  {
-    id: "g4",
-    title: "Together on the lawn",
-    src: "https://images.unsplash.com/photo-1511632765486-a01980e01a18?w=800&q=80",
-  },
+  { id: "g1", title: "Oscars Night", src: "/gallery/oscars-night.jpg" },
+  { id: "g2", title: "Red Day", src: "/gallery/red-day-dance.jpg" },
+  { id: "g3", title: "Campus Trip", src: "/gallery/campus-trip.jpg" },
+  { id: "g4", title: "Weekend Hike", src: "/gallery/hike.jpg" },
+  { id: "g5", title: "Dress-Up Day", src: "/gallery/dress-up-day.jpg" },
+  { id: "g6", title: "Hall Crew", src: "/gallery/hall-crew.jpg" },
+  { id: "g7", title: "Rugby Day", src: "/gallery/rugby-day.jpg" },
+  { id: "g8", title: "Gala Night", src: "/gallery/gala-night.jpg" },
+  { id: "g9", title: "Cheers in the Hall", src: "/gallery/hall-cheers.jpg" },
+  { id: "g10", title: "Welcome Packs", src: "/gallery/welcome-bags.jpg" },
+  { id: "g11", title: "Red Day Gathering", src: "/gallery/red-day.jpg" },
 ];
 
 export const academic = [

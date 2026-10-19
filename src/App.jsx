@@ -149,7 +149,7 @@ function Home() {
         <div className="carousel" role="list">
           {events.map((event) => (
             <article key={event.id} className="slide" role="listitem">
-              <img src={event.image} alt="" />
+              <img src={event.image} alt="" className={event.poster ? "poster" : undefined} />
               <div className="slide-copy">
                 <span className="slide-date">{event.date}</span>
                 <h3>{event.title}</h3>
@@ -245,7 +245,7 @@ function Events() {
       <div className="carousel stacked" role="list">
         {events.map((event) => (
           <article key={event.id} className="slide" role="listitem">
-            <img src={event.image} alt="" />
+            <img src={event.image} alt="" className={event.poster ? "poster" : undefined} />
             <div className="slide-copy">
               <span className="slide-date">{event.date}</span>
               <h3>{event.title}</h3>
