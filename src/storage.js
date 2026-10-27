@@ -1,10 +1,12 @@
 const KEY = "smh-connect-store";
 
 const defaults = {
+  role: "student",
   reviews: [],
   interviews: [],
   requests: [],
   feedback: [],
+  bookings: [],
 };
 
 function read() {
@@ -33,6 +35,16 @@ export function saveStore(partial) {
 export function addItem(listKey, item) {
   const store = read();
   const next = { ...store, [listKey]: [item, ...store[listKey]] };
+  write(next);
+  return next;
+}
+
+export function patchItem(listKey, id, patch) {
+  const store = read();
+  const next = {
+    ...store,
+    [listKey]: store[listKey].map((item) => (item.id === id ? { ...item, ...patch } : item)),
+  };
   write(next);
   return next;
 }

@@ -1,33 +1,40 @@
 export const notices = [
   {
+    id: "n0",
+    title: "Vision 2030 town hall — South Campus",
+    body: "Join the DVC: Engagement for a student briefing on the university’s 2030 priorities.",
+    date: "27 Oct 2026",
+    tag: "Campus",
+  },
+  {
     id: "n1",
-    title: "Water interruption — Block C",
+    title: "Water interruption — SMH Block C",
     body: "Scheduled maintenance on Saturday 08:00–12:00. Please store water in advance.",
     date: "2 Oct 2026",
     tag: "Urgent",
   },
   {
     id: "n2",
-    title: "Quiet hours reminder",
-    body: "Quiet hours are 22:00–06:00 during the exam period. Keep corridors clear.",
+    title: "Library 24-hour lab open for exams",
+    body: "South Campus 24-hour lab is open through the exam period. Student card required after 20:00.",
     date: "1 Oct 2026",
-    tag: "House",
+    tag: "Campus",
   },
   {
     id: "n3",
     title: "Visitor sign-in",
-    body: "All visitors must sign in at reception. Student cards are required after 20:00.",
+    body: "Residence visitors must sign in at reception. Student cards are required after 20:00.",
     date: "28 Sep 2026",
-    tag: "Access",
+    tag: "Housing",
   },
 ];
 
 export const announcements = [
   {
     id: "a1",
-    from: "SMH House Committee",
-    title: "Women’s Month Event — 27 Mar",
-    body: "Join us in the courtyard for speakers, music, and a community picnic.",
+    from: "Office of the Vice-Chancellor",
+    title: "Vision 2030 student briefing",
+    body: "A campus-wide update on people, purpose and a sustainable future.",
     date: "Today",
   },
   {
@@ -55,6 +62,8 @@ export const events = [
     time: "17:00",
     image: "/events/career-showcase.jpg",
     poster: true,
+    capacity: 180,
+    department: "Career Services",
   },
   {
     id: "e6",
@@ -64,14 +73,18 @@ export const events = [
     time: "19:30",
     image: "/events/movie-night.jpg",
     poster: true,
+    capacity: 120,
+    department: "Residence Life",
   },
   {
     id: "e1",
     date: "15 Mar",
-    title: "SMH Walk & Talk",
+    title: "Campus Walk & Talk",
     place: "Main Gate",
     time: "07:30",
     image: "https://images.unsplash.com/photo-1476480862126-209bfaa8edc8?w=900&q=80",
+    capacity: 80,
+    department: "Student Life",
   },
   {
     id: "e2",
@@ -80,6 +93,8 @@ export const events = [
     place: "Rec Hall",
     time: "18:00",
     image: "https://images.unsplash.com/photo-1517649763962-0c623066013b?w=900&q=80",
+    capacity: 60,
+    department: "Sport & Recreation",
   },
   {
     id: "e3",
@@ -88,14 +103,18 @@ export const events = [
     place: "Courtyard",
     time: "16:00",
     image: "https://images.unsplash.com/photo-1511632765486-a01980e01a18?w=900&q=80",
+    capacity: 200,
+    department: "Transformation Office",
   },
   {
     id: "e4",
     date: "5 Apr",
-    title: "Floor Braai",
+    title: "Community Braai",
     place: "Back Lawn",
     time: "17:00",
     image: "https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=900&q=80",
+    capacity: 90,
+    department: "Residence Life",
   },
 ];
 
@@ -135,18 +154,19 @@ export const gallery = [
 ];
 
 export const academic = [
-  { id: "ac1", title: "Past Exam Papers", detail: "Faculty repositories and shared SMH study packs." },
+  { id: "ac1", title: "Past Exam Papers", detail: "Faculty repositories and shared study packs." },
   { id: "ac2", title: "Library Links", detail: "NMU library catalogue, e-journals, and booking." },
-  { id: "ac3", title: "Study Spaces on Campus", detail: "Quiet rooms, 24-hour lab, and SMH lounge hours." },
+  { id: "ac3", title: "Study Spaces on Campus", detail: "Quiet rooms, 24-hour lab, and residence lounge hours." },
   { id: "ac4", title: "Academic Support Contacts", detail: "Tutors, writing centre, and faculty advisors." },
 ];
 
 export const platforms = [
-  { id: "p1", name: "WhatsApp", handle: "SMH House Chat", color: "#25D366" },
-  { id: "p2", name: "Instagram", handle: "@smh.family", color: "#E1306C" },
-  { id: "p3", name: "TikTok", handle: "@smhconnect", color: "#111111" },
-  { id: "p4", name: "YouTube", handle: "SMH Stories", color: "#FF0000" },
-  { id: "p5", name: "Email", handle: "smh@nmu.ac.za", color: "#1a6b32" },
+  { id: "p1", name: "Instagram", handle: "@mandelauni", color: "#E1306C" },
+  { id: "p2", name: "Facebook", handle: "Nelson Mandela University", color: "#1877F2" },
+  { id: "p3", name: "X / Twitter", handle: "@MandelaUni", color: "#111111" },
+  { id: "p4", name: "YouTube", handle: "Mandela Uni", color: "#FF0000" },
+  { id: "p5", name: "TikTok", handle: "@mandelauni", color: "#111111" },
+  { id: "p6", name: "WhatsApp", handle: "SMH House Chat", color: "#25D366" },
 ];
 
 export const laundrySchedule = [
@@ -159,8 +179,186 @@ export const laundrySchedule = [
   { day: "Sun", slots: "10:00–16:00 · Open" },
 ];
 
+export const requestTypes = [
+  { type: "Maintenance", department: "Facilities", email: "facilities@mandela.ac.za" },
+  { type: "Venue booking", department: "Venues & Events", email: "venues@mandela.ac.za" },
+  { type: "ICT / Wi-Fi", department: "ICT Services", email: "icthelp@mandela.ac.za" },
+  { type: "Housing", department: "Student Housing", email: "housing@mandela.ac.za" },
+  { type: "Access", department: "Protection Services", email: "protection@mandela.ac.za" },
+];
+
 export const seedRequests = [
-  { id: "r1", type: "Wi-Fi", title: "Slow connection, 3rd floor C", status: "In Progress" },
-  { id: "r2", type: "Laundry", title: "Dryer 2 out of service", status: "Reported" },
-  { id: "r3", type: "Access", title: "Student card not scanning", status: "Resolved" },
+  {
+    id: "r1",
+    type: "ICT / Wi-Fi",
+    title: "Slow connection, South Campus lab",
+    status: "In Progress",
+    department: "ICT Services",
+    email: "icthelp@mandela.ac.za",
+  },
+  {
+    id: "r2",
+    type: "Maintenance",
+    title: "Dryer 2 out of service — SMH",
+    status: "Reported",
+    department: "Facilities",
+    email: "facilities@mandela.ac.za",
+  },
+  {
+    id: "r3",
+    type: "Access",
+    title: "Student card not scanning",
+    status: "Resolved",
+    department: "Protection Services",
+    email: "protection@mandela.ac.za",
+  },
+];
+
+export const departments = [
+  {
+    id: "d1",
+    name: "Facilities",
+    email: "facilities@mandela.ac.za",
+    hours: "Mon–Fri 07:30–16:30",
+    handles: "Maintenance, lights, plumbing",
+  },
+  {
+    id: "d2",
+    name: "Student Housing",
+    email: "housing@mandela.ac.za",
+    hours: "Mon–Fri 08:00–16:00",
+    handles: "Residence access, room issues",
+  },
+  {
+    id: "d3",
+    name: "Venues & Events",
+    email: "venues@mandela.ac.za",
+    hours: "Mon–Fri 08:00–16:30",
+    handles: "Hall, lecture theatre, courtyard bookings",
+  },
+  {
+    id: "d4",
+    name: "ICT Services",
+    email: "icthelp@mandela.ac.za",
+    hours: "Mon–Fri 08:00–16:30",
+    handles: "Wi-Fi, labs, student email",
+  },
+  {
+    id: "d5",
+    name: "Protection Services",
+    email: "protection@mandela.ac.za",
+    hours: "24 hours",
+    handles: "Access, cards, safety",
+  },
+  {
+    id: "d6",
+    name: "Student Life",
+    email: "studentlife@mandela.ac.za",
+    hours: "Mon–Fri 08:00–16:00",
+    handles: "Societies, campus events",
+  },
+];
+
+export const venues = [
+  {
+    id: "v1",
+    name: "Lecture Theatre",
+    campus: "South Campus",
+    capacity: 180,
+    hours: "07:00–22:00",
+    slots: ["09:00–12:00", "13:00–16:00", "17:00–20:00"],
+    available: 2,
+    owner: "Venues & Events",
+  },
+  {
+    id: "v2",
+    name: "Rec Hall",
+    campus: "South Campus",
+    capacity: 120,
+    hours: "08:00–21:00",
+    slots: ["10:00–13:00", "14:00–17:00", "18:00–21:00"],
+    available: 1,
+    owner: "Sport & Recreation",
+  },
+  {
+    id: "v3",
+    name: "SMH Courtyard",
+    campus: "Sindiso Magaqa Heights",
+    capacity: 200,
+    hours: "08:00–20:00",
+    slots: ["12:00–15:00", "16:00–19:00"],
+    available: 2,
+    owner: "Residence Life",
+  },
+  {
+    id: "v4",
+    name: "Library Seminar Room",
+    campus: "South Campus",
+    capacity: 24,
+    hours: "08:00–20:00",
+    slots: ["09:00–11:00", "11:30–13:30", "14:00–16:00"],
+    available: 3,
+    owner: "Library",
+  },
+];
+
+export const visionPillars = [
+  {
+    id: "vp1",
+    title: "A dynamic African university",
+    body: "Leadership in knowledge that serves a sustainable future — for Madibaz, the city, and the continent.",
+  },
+  {
+    id: "vp2",
+    title: "People",
+    body: "Students and staff at the centre: access, wellbeing, and a campus that feels like a community.",
+  },
+  {
+    id: "vp3",
+    title: "Purpose",
+    body: "Teaching, research and engagement that solve real problems in the Eastern Cape and beyond.",
+  },
+  {
+    id: "vp4",
+    title: "Progress",
+    body: "A campus platform that makes notices, venues, and support easy to find — so the university can move as one.",
+  },
+];
+
+export const faqs = [
+  {
+    id: "f1",
+    q: "Who is this app for?",
+    a: "All NMU students and staff. Residence tools (laundry, SMH gallery) still live here as one campus community.",
+  },
+  {
+    id: "f2",
+    q: "How do requests reach a department?",
+    a: "This POC shows the destination email. A later release will send via Outlook to that department’s inbox.",
+  },
+  {
+    id: "f3",
+    q: "Is my idea anonymous?",
+    a: "Your Word can be sent anonymously. Named submissions help staff follow up.",
+  },
+  {
+    id: "f4",
+    q: "How is my data used?",
+    a: "See Privacy (POPIA). This POC stores data on this device only. Legal Services copy can replace this before a pilot.",
+  },
+];
+
+export const newsletters = [
+  {
+    id: "nl1",
+    title: "Madibaz Weekly",
+    date: "27 Oct 2026",
+    blurb: "Exam support hours, Career Showcase, and the Vision 2030 town hall.",
+  },
+  {
+    id: "nl2",
+    title: "Housing Brief",
+    date: "21 Oct 2026",
+    blurb: "Residence check-in windows and visitor hours for the exam period.",
+  },
 ];

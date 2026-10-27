@@ -1,6 +1,13 @@
-# SMH Connect
+# NMU Connect (campus POC)
 
-Mobile-first web app for **Sindiso Magaqa Heights** — People, Purpose, Progress.
+Campus-wide proof of concept built from SMH Connect.
+
+The original residence app is unchanged on `main` and tagged `smh-connect-v1`.
+
+```bash
+git checkout smh-connect-v1   # original SMH Connect
+git checkout poc/nmu-connect  # this campus POC
+```
 
 ## Run locally
 
