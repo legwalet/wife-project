@@ -24,6 +24,10 @@ function useSession() {
   return useContext(Session);
 }
 
+function newsletterPage(issue, n) {
+  return `${issue.folder}/page-${String(n).padStart(2, "0")}.jpg`;
+}
+
 function Icon({ name }) {
   const common = { viewBox: "0 0 24 24", fill: "none", stroke: "currentColor", strokeWidth: "2" };
   const paths = {
@@ -252,6 +256,14 @@ function Home() {
 
       <section className="section">
         <div className="section-head">
+          <h2>Latest newsletter</h2>
+          <Link to="/newsletters">See all</Link>
+        </div>
+        <IssueCard issue={newsletters[0]} featured />
+      </section>
+
+      <section className="section">
+        <div className="section-head">
           <h2>Socials</h2>
           <Link to="/platforms">See all</Link>
         </div>
@@ -345,21 +357,95 @@ function Announcements() {
   );
 }
 
+function IssueCard({ issue, featured = false }) {
+  const cover = issue.folder ? newsletterPage(issue, 1) : null;
+  const inner = (
+    <>
+      {cover ? <img src={cover} alt="" /> : null}
+      <div>
+        <div className="card-meta">
+          {issue.from ? <small className="from">{issue.from}</small> : <span />}
+          <small>{issue.date}</small>
+        </div>
+        <h3>{issue.title}</h3>
+        {issue.edition ? <p className="issue-edition">{issue.edition}</p> : null}
+        <p>{issue.blurb}</p>
+      </div>
+    </>
+  );
+  if (issue.pageCount) {
+    return (
+      <Link className={`issue-card${featured ? " featured" : ""}`} to={`/newsletters/${issue.id}`}>
+        {inner}
+      </Link>
+    );
+  }
+  return <article className="issue-card text-only">{inner}</article>;
+}
+
 function Newsletters() {
   return (
     <div className="screen">
-      <ScreenHeader title="Newsletters" />
+      <ScreenHeader title="Newsletters" subtitle="Campus + faculty" />
       <ul className="cards">
         {newsletters.map((n) => (
-          <li key={n.id} className="card">
-            <div className="card-meta">
-              <small>{n.date}</small>
-            </div>
-            <h3>{n.title}</h3>
-            <p>{n.blurb}</p>
+          <li key={n.id}>
+            <IssueCard issue={n} featured={Boolean(n.pageCount)} />
           </li>
         ))}
       </ul>
+    </div>
+  );
+}
+
+function NewsletterReader() {
+  const { id } = useParams();
+  const issue = newsletters.find((n) => n.id === id);
+  if (!issue?.pageCount) return <Navigate to="/newsletters" replace />;
+  const pages = Array.from({ length: issue.pageCount }, (_, i) => i + 1);
+
+  function jump(page) {
+    document.getElementById(`nl-page-${page}`)?.scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+
+  return (
+    <div className="screen">
+      <ScreenHeader title={issue.title} subtitle={issue.edition} />
+      <div className="nl-toolbar">
+        {issue.pdf ? (
+          <a className="chip" href={issue.pdf} target="_blank" rel="noreferrer">
+            Open PDF
+          </a>
+        ) : null}
+        {issue.site ? (
+          <a className="chip" href={issue.site} target="_blank" rel="noreferrer">
+            Website
+          </a>
+        ) : null}
+        {issue.email ? (
+          <a className="chip" href={`mailto:${issue.email}`}>
+            Email
+          </a>
+        ) : null}
+        <small>{issue.pageCount} pages</small>
+      </div>
+      {issue.contents?.length ? (
+        <div className="nl-toc" role="navigation" aria-label="Contents">
+          {issue.contents.map((c) => (
+            <button type="button" key={c.title} className="chip" onClick={() => jump(c.page)}>
+              {c.title}
+            </button>
+          ))}
+        </div>
+      ) : null}
+      {pages.map((n) => (
+        <figure key={n} className="nl-page" id={`nl-page-${n}`}>
+          <img src={newsletterPage(issue, n)} alt={`${issue.title}, page ${n}`} loading={n > 2 ? "lazy" : "eager"} />
+          <figcaption>
+            Page {n} of {issue.pageCount}
+          </figcaption>
+        </figure>
+      ))}
     </div>
   );
 }
@@ -944,6 +1030,7 @@ function AppRoutes() {
         <Route path="/notices" element={<Notices />} />
         <Route path="/announcements" element={<Announcements />} />
         <Route path="/newsletters" element={<Newsletters />} />
+        <Route path="/newsletters/:id" element={<NewsletterReader />} />
         <Route path="/events" element={<Events />} />
         <Route path="/events/:id" element={<EventBook />} />
         <Route path="/directory" element={<Directory />} />

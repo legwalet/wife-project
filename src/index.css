@@ -367,6 +367,123 @@ select {
   object-fit: cover;
 }
 
+.issue-card {
+  display: grid;
+  grid-template-columns: 88px minmax(0, 1fr);
+  gap: 12px;
+  align-items: center;
+  background: linear-gradient(180deg, #fff, #fff7ea);
+  border-radius: var(--radius);
+  padding: 12px;
+  box-shadow: var(--shadow);
+  border: 1px solid rgba(196, 92, 38, 0.08);
+  color: inherit;
+}
+
+.issue-card.featured {
+  grid-template-columns: 1fr;
+  padding: 0;
+  overflow: hidden;
+  background: #0b1c3a;
+  color: #fff;
+}
+
+.issue-card img {
+  width: 88px;
+  height: 118px;
+  object-fit: cover;
+  object-position: center top;
+  border-radius: 12px;
+  max-width: none;
+  display: block;
+}
+
+.issue-card.featured img {
+  width: 100%;
+  height: clamp(180px, 38vw, 280px);
+  border-radius: 0;
+}
+
+.issue-card.featured > div {
+  padding: 12px 14px 16px;
+}
+
+.issue-card h3 {
+  margin: 4px 0 0;
+  font-size: 16px;
+}
+
+.issue-card p {
+  margin: 4px 0 0;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.issue-card.featured p,
+.issue-card.featured small {
+  color: rgba(255, 255, 255, 0.78);
+}
+
+.issue-edition {
+  font-weight: 800;
+  color: var(--rust) !important;
+  font-size: 13px !important;
+}
+
+.issue-card.featured .issue-edition {
+  color: var(--gold) !important;
+}
+
+.issue-card.text-only {
+  grid-template-columns: 1fr;
+}
+
+.nl-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.nl-toc {
+  display: flex;
+  gap: 6px;
+  overflow-x: auto;
+  padding-bottom: 8px;
+  margin-bottom: 12px;
+  -webkit-overflow-scrolling: touch;
+}
+
+.nl-toc .chip,
+.nl-toolbar .chip {
+  border: 0;
+  cursor: pointer;
+}
+
+.nl-page {
+  margin: 0 0 14px;
+  background: #fff;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+}
+
+.nl-page img {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-width: none;
+}
+
+.nl-page figcaption {
+  margin: 0;
+  padding: 8px 12px 10px;
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 700;
+}
+
 .shortcuts.four {
   grid-template-columns: repeat(2, minmax(0, 1fr));
 }
@@ -838,6 +955,9 @@ select {
   }
   .cards {
     grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr));
+  }
+  .cards > li:has(.issue-card.featured) {
+    grid-column: 1 / -1;
   }
   .gallery {
     grid-template-columns: repeat(3, minmax(0, 1fr));
