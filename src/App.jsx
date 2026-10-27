@@ -255,13 +255,7 @@ function Home() {
           <h2>Socials</h2>
           <Link to="/platforms">See all</Link>
         </div>
-        <div className="social-row">
-          {platforms
-            .filter((p) => p.group === "Campus")
-            .map((p) => (
-              <SocialCard key={p.id} platform={p} />
-            ))}
-        </div>
+        <SocialRow group="Campus" />
       </section>
 
       <section className="pulse">
@@ -272,24 +266,26 @@ function Home() {
   );
 }
 
-function SocialCard({ platform }) {
-  const inner = (
-    <>
-      <span className="dot" style={{ background: platform.color }} />
-      <div>
-        <h3>{platform.name}</h3>
-        <p>{platform.handle}</p>
-      </div>
-    </>
+function SocialRow({ group }) {
+  return (
+    <div className="social-row">
+      {platforms
+        .filter((p) => p.group === group && p.url)
+        .map((p) => (
+          <a
+            key={p.id}
+            className="social-logo"
+            href={p.url}
+            target="_blank"
+            rel="noreferrer"
+            aria-label={`${p.name} ${p.handle}`}
+            title={p.handle}
+          >
+            <img src={p.logo} alt="" />
+          </a>
+        ))}
+    </div>
   );
-  if (platform.url) {
-    return (
-      <a className="card row social-card" href={platform.url} target="_blank" rel="noreferrer">
-        {inner}
-      </a>
-    );
-  }
-  return <div className="card row social-card">{inner}</div>;
 }
 
 function Shortcut({ to, icon, tone, label }) {
@@ -733,15 +729,7 @@ function Platforms() {
       {groups.map((group) => (
         <section key={group}>
           <h2 className="block-title">{group === "Campus" ? "Nelson Mandela University" : "Sindiso Magaqa Heights"}</h2>
-          <ul className="cards">
-            {platforms
-              .filter((p) => p.group === group)
-              .map((p) => (
-                <li key={p.id}>
-                  <SocialCard platform={p} />
-                </li>
-              ))}
-          </ul>
+          <SocialRow group={group} />
         </section>
       ))}
     </div>

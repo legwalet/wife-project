@@ -333,23 +333,38 @@ select {
 }
 
 .social-row {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 10px;
-}
-
-.card.row.social-card {
-  justify-content: flex-start;
+  display: flex;
+  flex-wrap: wrap;
   gap: 12px;
-  text-align: left;
+  align-items: center;
 }
 
-.social-card h3 {
-  margin: 0;
+.social-logo {
+  width: 48px;
+  height: 48px;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 8px 18px rgba(15, 61, 31, 0.16);
+  flex-shrink: 0;
+  transition: transform 0.15s ease;
 }
 
-.social-card p {
-  margin: 2px 0 0;
+.social-logo:hover,
+.social-logo:focus-visible {
+  transform: translateY(-2px) scale(1.06);
+}
+
+.social-logo:focus-visible {
+  outline: 3px solid var(--gold);
+  outline-offset: 3px;
+}
+
+.social-logo img {
+  display: block;
+  width: 48px;
+  height: 48px;
+  max-width: none;
+  object-fit: cover;
 }
 
 .shortcuts.four {
