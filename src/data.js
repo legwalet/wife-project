@@ -161,12 +161,16 @@ export const academic = [
 ];
 
 export const platforms = [
-  { id: "p1", name: "Instagram", handle: "@mandelauni", color: "#E1306C" },
-  { id: "p2", name: "Facebook", handle: "Nelson Mandela University", color: "#1877F2" },
-  { id: "p3", name: "X / Twitter", handle: "@MandelaUni", color: "#111111" },
-  { id: "p4", name: "YouTube", handle: "Mandela Uni", color: "#FF0000" },
-  { id: "p5", name: "TikTok", handle: "@mandelauni", color: "#111111" },
-  { id: "p6", name: "WhatsApp", handle: "SMH House Chat", color: "#25D366" },
+  { id: "p1", group: "Campus", name: "Instagram", handle: "@mandelauni", color: "#E1306C", url: "https://www.instagram.com/mandelauni/" },
+  { id: "p2", group: "Campus", name: "Facebook", handle: "Nelson Mandela University", color: "#1877F2", url: "https://www.facebook.com/MandelaUni/" },
+  { id: "p3", group: "Campus", name: "X / Twitter", handle: "@MandelaUni", color: "#111111", url: "https://x.com/MandelaUni" },
+  { id: "p4", group: "Campus", name: "YouTube", handle: "Mandela Uni", color: "#FF0000", url: "https://www.youtube.com/@NelsonMandelaUniversity" },
+  { id: "p5", group: "Campus", name: "TikTok", handle: "@mandelauni", color: "#111111", url: "https://www.tiktok.com/@mandelauni" },
+  { id: "p6", group: "SMH", name: "WhatsApp", handle: "SMH House Chat", color: "#25D366" },
+  { id: "p7", group: "SMH", name: "Instagram", handle: "@smh.family", color: "#E1306C", url: "https://www.instagram.com/smh.family/" },
+  { id: "p8", group: "SMH", name: "TikTok", handle: "@smhconnect", color: "#111111", url: "https://www.tiktok.com/@smhconnect" },
+  { id: "p9", group: "SMH", name: "YouTube", handle: "SMH Stories", color: "#FF0000", url: "https://www.youtube.com/results?search_query=Sindiso+Magaqa+Heights" },
+  { id: "p10", group: "SMH", name: "Email", handle: "smh@nmu.ac.za", color: "#1a6b32", url: "mailto:smh@nmu.ac.za" },
 ];
 
 export const laundrySchedule = [

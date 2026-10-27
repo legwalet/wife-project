@@ -317,8 +317,39 @@ select {
 
 .shortcuts {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 10px;
+}
+
+.slide-shot {
+  flex: 0 0 min(42%, 180px);
+  scroll-snap-align: start;
+  height: auto;
+  min-height: 0;
+}
+
+.slide-shot img {
+  height: 140px;
+}
+
+.social-row {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+}
+
+.card.row.social-card {
+  justify-content: flex-start;
+  gap: 12px;
+  text-align: left;
+}
+
+.social-card h3 {
+  margin: 0;
+}
+
+.social-card p {
+  margin: 2px 0 0;
 }
 
 .shortcuts.four {
@@ -785,7 +816,7 @@ select {
     flex-basis: 280px;
   }
   .shortcuts {
-    grid-template-columns: repeat(6, minmax(0, 1fr));
+    grid-template-columns: repeat(4, minmax(0, 1fr));
   }
   .shortcuts.four {
     grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -882,7 +913,7 @@ select {
 
 @media (max-width: 420px) {
   .shortcuts {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-columns: repeat(4, minmax(0, 1fr));
   }
 }
 

@@ -226,10 +226,41 @@ function Home() {
         <div className="shortcuts">
           <Shortcut to="/notices" icon="bell" tone="rust" label="Notices" />
           <Shortcut to="/requests" icon="wrench" tone="gold" label="Log issue" />
-          <Shortcut to="/directory" icon="pin" tone="green" label="Directory" />
-          <Shortcut to="/vision" icon="star" tone="leaf" label="Vision 2030" />
-          <Shortcut to="/feedback" icon="heart" tone="rust" label="Your Word" />
-          <Shortcut to="/newsletters" icon="megaphone" tone="gold" label="News" />
+          <Shortcut to="/gallery" icon="camera" tone="green" label="Gallery" />
+          <Shortcut to="/directory" icon="pin" tone="leaf" label="Directory" />
+          <Shortcut to="/platforms" icon="share" tone="rust" label="Socials" />
+          <Shortcut to="/vision" icon="star" tone="gold" label="Vision 2030" />
+          <Shortcut to="/feedback" icon="heart" tone="green" label="Your Word" />
+          <Shortcut to="/newsletters" icon="megaphone" tone="leaf" label="News" />
+        </div>
+      </section>
+
+      <section className="section">
+        <div className="section-head">
+          <h2>Gallery</h2>
+          <Link to="/gallery">See all</Link>
+        </div>
+        <div className="carousel" role="list">
+          {gallery.slice(0, 8).map((g) => (
+            <Link key={g.id} to="/gallery" className="shot slide-shot" role="listitem">
+              <img src={g.src} alt={g.title} />
+              <span>{g.title}</span>
+            </Link>
+          ))}
+        </div>
+      </section>
+
+      <section className="section">
+        <div className="section-head">
+          <h2>Socials</h2>
+          <Link to="/platforms">See all</Link>
+        </div>
+        <div className="social-row">
+          {platforms
+            .filter((p) => p.group === "Campus")
+            .map((p) => (
+              <SocialCard key={p.id} platform={p} />
+            ))}
         </div>
       </section>
 
@@ -239,6 +270,26 @@ function Home() {
       </section>
     </div>
   );
+}
+
+function SocialCard({ platform }) {
+  const inner = (
+    <>
+      <span className="dot" style={{ background: platform.color }} />
+      <div>
+        <h3>{platform.name}</h3>
+        <p>{platform.handle}</p>
+      </div>
+    </>
+  );
+  if (platform.url) {
+    return (
+      <a className="card row social-card" href={platform.url} target="_blank" rel="noreferrer">
+        {inner}
+      </a>
+    );
+  }
+  return <div className="card row social-card">{inner}</div>;
 }
 
 function Shortcut({ to, icon, tone, label }) {
@@ -675,20 +726,24 @@ function Academic() {
 }
 
 function Platforms() {
+  const groups = ["Campus", "SMH"];
   return (
     <div className="screen">
-      <ScreenHeader title="Socials" subtitle="Official NMU pages" />
-      <ul className="cards">
-        {platforms.map((p) => (
-          <li key={p.id} className="card row">
-            <span className="dot" style={{ background: p.color }} />
-            <div>
-              <h3>{p.name}</h3>
-              <p>{p.handle}</p>
-            </div>
-          </li>
-        ))}
-      </ul>
+      <ScreenHeader title="Socials" subtitle="Campus + SMH" />
+      {groups.map((group) => (
+        <section key={group}>
+          <h2 className="block-title">{group === "Campus" ? "Nelson Mandela University" : "Sindiso Magaqa Heights"}</h2>
+          <ul className="cards">
+            {platforms
+              .filter((p) => p.group === group)
+              .map((p) => (
+                <li key={p.id}>
+                  <SocialCard platform={p} />
+                </li>
+              ))}
+          </ul>
+        </section>
+      ))}
     </div>
   );
 }
@@ -884,9 +939,9 @@ function Profile() {
         </Link>
       ) : null}
       <div className="shortcuts four">
-        <Shortcut to="/directory" icon="pin" tone="green" label="Directory" />
         <Shortcut to="/gallery" icon="camera" tone="gold" label="Gallery" />
-        <Shortcut to="/laundry" icon="shirt" tone="leaf" label="Laundry" />
+        <Shortcut to="/platforms" icon="share" tone="leaf" label="Socials" />
+        <Shortcut to="/laundry" icon="shirt" tone="green" label="Laundry" />
         <Shortcut to="/privacy" icon="shield" tone="rust" label="Privacy" />
       </div>
     </div>
